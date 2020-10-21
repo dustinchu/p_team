@@ -22,6 +22,10 @@ class _BooksAppState extends State<BooksApp> {
     print("1");
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      theme: new ThemeData(
+        primaryColor:Colors.orange,
+        brightness: Brightness.dark,
+      ),
       title: 'P.team',
       routerDelegate: _routerDelegate,
       routeInformationParser: _routeInformationParser,

@@ -2,8 +2,9 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:p_team/common/responsive_widget.dart';
+import 'package:p_team/common/web_scrollbar.dart';
 import 'package:p_team/model/product.dart';
-import 'package:p_team/screens/home/top_bar_contents.dart';
+import 'package:p_team/common/widget/top_bar_contents.dart';
 
 import 'bottom_bar.dart';
 
@@ -47,8 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ? _scrollPosition / (screenSize.height * 0.40)
         : 1;
 
-    final Stream<QuerySnapshot> _channelsStream =
-        Firestore.instance.collection("product").document("item").collection("Connectors").snapshots();
+    final Stream<QuerySnapshot> _channelsStream = Firestore.instance
+        .collection("product")
+        .document("item")
+        .collection("Connectors")
+        .snapshots();
 
     return Scaffold(
       appBar: ResponsiveWidget.isSmallScreen(context)
@@ -84,63 +88,108 @@ class _HomeScreenState extends State<HomeScreen> {
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
-            SizedBox(height: screenSize.height / 20),
-            SizedBox(
-                height: screenSize.height * 0.5,
-                width: screenSize.width,
-                child: Carousel(
-                  images: [
-                    // NetworkImage(
-                    //     'https://cdn-images-1.medium.com/max/2000/1*GqdzzfB_BHorv7V2NV7Jgg.jpeg'),
-                    // NetworkImage(
-                    //     'https://cdn-images-1.medium.com/max/2000/1*wnIEgP1gNMrK5gZU7QS0-A.jpeg'),
-                    ExactAssetImage("assets/images/1.jpg"),
-                    ExactAssetImage("assets/images/2.jpg"),
-                    ExactAssetImage("assets/images/3.jpg")
-                  ],
-                  dotSize: 4.0,
-                  dotSpacing: 15.0,
-                  dotColor: Colors.orange,
-                  indicatorBgPadding: 5.0,
-                  dotBgColor: Colors.purple.withOpacity(0.9),
-                  borderRadius: true,
-                )),
-            SizedBox(height: screenSize.height / 30),
-            SizedBox(
-              height: screenSize.height * 0.5,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: Card(
-                    child: StreamBuilder(
-                  stream: _channelsStream,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      return Text("Error${snapshot.error}");
-                    }
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.waiting:
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      default:
-                        List<DocumentSnapshot> documents =
-                            snapshot.data.documents;
-                        return snapshot.hasData != null
-                            ? ListView(
-                                key: GlobalKey(),
-                                children:
-                                    documents.map((DocumentSnapshot document) {
-                                  return ListTile(
-                                    title: Text(document["DigiKeyPartNumber"]),
-                                  );
-                                }).toList())
-                            : Text("Nipe");
-                    }
-                  },
-                )),
-              ),
+            FlatButton(
+              child: Text("關於"),
+              onPressed: () => widget.onAbout("about"),
             ),
+            SizedBox(
+              height: 700,
+              width: screenSize.width,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                  // image: DecorationImage(
+                  //     image: AssetImage("assets/images/1.jpg"),
+                  //     fit: BoxFit.cover),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("全球工程師及採購的最佳幫手",
+                          style: TextStyle(color: Colors.white, fontSize: 64)),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text("品大科技專注於電子元件的現貨供應，免運費、短交期。",
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      FlatButton(
+                        minWidth: 240,
+                        height: 64,
+                        onPressed: () => print("button"),
+                        child: Text(
+                          "聯絡我們",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: 3,
+                          ),
+                        ),
+                        color: Colors.blue,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Carousel(
+              //   images: [
+              //     // NetworkImage(
+              //     //     'https://cdn-images-1.medium.com/max/2000/1*GqdzzfB_BHorv7V2NV7Jgg.jpeg'),
+              //     // NetworkImage(
+              //     //     'https://cdn-images-1.medium.com/max/2000/1*wnIEgP1gNMrK5gZU7QS0-A.jpeg'),
+              //     ExactAssetImage("assets/images/1.jpg"),
+              //     ExactAssetImage("assets/images/2.jpg"),
+              //     ExactAssetImage("assets/images/3.jpg")
+              //   ],
+              //   dotSize: 4.0,
+              //   dotSpacing: 15.0,
+              //   dotColor: Colors.orange,
+              //   indicatorBgPadding: 5.0,
+              //   dotBgColor: Colors.purple.withOpacity(0.9),
+              //   borderRadius: true,
+              // )
+            ),
+            SizedBox(height: screenSize.height / 30),
+            // SizedBox(
+            //   height: screenSize.height * 0.5,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(left: 20, right: 20),
+            //     child: Card(
+            //         child: StreamBuilder(
+            //       stream: _channelsStream,
+            //       builder: (BuildContext context,
+            //           AsyncSnapshot<QuerySnapshot> snapshot) {
+            //         if (snapshot.hasError) {
+            //           return Text("Error${snapshot.error}");
+            //         }
+            //         switch (snapshot.connectionState) {
+            //           case ConnectionState.waiting:
+            //             return Center(
+            //               child: CircularProgressIndicator(),
+            //             );
+            //           default:
+            //             List<DocumentSnapshot> documents =
+            //                 snapshot.data.documents;
+            //             return snapshot.hasData != null
+            //                 ? ListView(
+            //                     key: GlobalKey(),
+            //                     children:
+            //                         documents.map((DocumentSnapshot document) {
+            //                       return ListTile(
+            //                         title: Text(document["DigiKeyPartNumber"]),
+            //                       );
+            //                     }).toList())
+            //                 : Text("Nipe");
+            //         }
+            //       },
+            //     )),
+            //   ),
+            // ),
 
             // SizedBox(
             //   height: screenSize.height * 0.5,
