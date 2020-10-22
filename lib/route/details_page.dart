@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p_team/model/product.dart';
-import 'package:p_team/screens/product_screen.dart';
+import 'package:p_team/screens/product.dart';
 
 class DetailsPage extends Page {
   final Product product;
@@ -10,7 +10,6 @@ class DetailsPage extends Page {
   }) : super(key: ValueKey(product));
 
   Route createRoute(BuildContext context) {
-    print("8");
     return MaterialPageRoute(
       settings: this,
       builder: (BuildContext context) {

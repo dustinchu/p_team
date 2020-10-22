@@ -10,27 +10,24 @@ class AboutScreen extends StatefulWidget {
 class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
-    double padValue = 0;
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
+            Text("About"),
             Container(
               color: Colors.blue,
               height: 500,
-
             ),
-              Container(
+            Container(
               color: Colors.pink,
               height: 500,
-              
             ),
-              Container(
+            Container(
               color: Colors.orange,
               height: 500,
-              
             ),
           ],
         ),

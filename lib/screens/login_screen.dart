@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:p_team/common/responsive_widget.dart';
 import 'package:p_team/common/widget/navigation_bottom_bar.dart';
 
-class ProductScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   final ValueChanged<String> onAbout;
-  ProductScreen({
+  LoginScreen({
     @required this.onAbout,
   });
 
   @override
-  _ProductScreenState createState() => _ProductScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _ProductScreenState extends State<ProductScreen> {
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
-            Text("Product"),
+            Text("login"),
             Container(
               color: Colors.blue,
               height: 500,
@@ -39,7 +39,7 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
       bottomNavigationBar: ResponsiveWidget.isSmallScreen(context)
           ? NavigationBottomBar(
-              selectedIndex: 2,
+              selectedIndex: 4,
               onSelectTab: (index) {
                 switch (index) {
                   case 0:

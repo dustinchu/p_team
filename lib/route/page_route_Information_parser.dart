@@ -9,7 +9,6 @@ class PageRouteInformationParser extends RouteInformationParser<RoutePath> {
     final uri = Uri.parse(routeInformation.location);
     // print("parser==${uri.pathSegments.length} parser2 ===${uri.pathSegments.first}");
     // Handle '/'
-    print("3");
     if (uri.pathSegments.length == 0) {
       return RoutePath.home();
     }
@@ -25,8 +24,15 @@ class PageRouteInformationParser extends RouteInformationParser<RoutePath> {
     } else {
       switch (uri.pathSegments[0]) {
         case "about":
-          print("?");
           return RoutePath.page("about");
+        case "contact":
+          return RoutePath.page("contact");
+        case "product":
+          return RoutePath.page("product");
+        case "login":
+          return RoutePath.page("login");
+        case "shopping":
+          return RoutePath.page("shopping");
           break;
         default:
       }
@@ -38,9 +44,20 @@ class PageRouteInformationParser extends RouteInformationParser<RoutePath> {
 
   @override
   RouteInformation restoreRouteInformation(RoutePath path) {
-    print("2");
     if (path.pageID == "about") {
       return RouteInformation(location: '/about');
+    }
+    if (path.pageID == "contact") {
+      return RouteInformation(location: '/contact');
+    }
+    if (path.pageID == "product") {
+      return RouteInformation(location: '/product');
+    }
+    if (path.pageID == "login") {
+      return RouteInformation(location: '/login');
+    }
+    if (path.pageID == "shopping") {
+      return RouteInformation(location: '/shopping');
     }
     if (path.isUnknown) {
       return RouteInformation(location: '/404');

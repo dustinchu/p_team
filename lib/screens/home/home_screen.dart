@@ -1,8 +1,12 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:badges/badges.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:p_team/common/responsive_widget.dart';
 import 'package:p_team/common/web_scrollbar.dart';
+import 'package:p_team/common/widget/navigation_bottom_bar.dart';
 import 'package:p_team/model/product.dart';
 import 'package:p_team/common/widget/top_bar_contents.dart';
 
@@ -47,7 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
     _opacity = _scrollPosition < screenSize.height * 0.40
         ? _scrollPosition / (screenSize.height * 0.40)
         : 1;
+    double _fonsize1 = 64;
+    int selectedIndex = 0;
 
+    ResponsiveWidget.isSmallScreen(context) ? _fonsize1 = 40 : _fonsize1 = 64;
     final Stream<QuerySnapshot> _channelsStream = Firestore.instance
         .collection("product")
         .document("item")
@@ -62,14 +69,25 @@ class _HomeScreenState extends State<HomeScreen> {
               elevation: 0,
               centerTitle: true,
               actions: [
-                IconButton(
-                    icon: Icon(Icons.brightness_6),
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onPressed: () => null),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Badge(
+                    position: BadgePosition.topEnd(top: -5, end: -5),
+                    animationDuration: Duration(milliseconds: 300),
+                    animationType: BadgeAnimationType.slide,
+                    badgeContent: Text(
+                      "3",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    child: IconButton(
+                        icon: Icon(Icons.shopping_cart_outlined,
+                            color: Colors.orange),
+                        onPressed: () {}),
+                  ),
+                ),
               ],
               title: Text(
-                'EXPLORE',
+                'P.team',
                 style: TextStyle(
                   color: Colors.blueGrey[100],
                   fontSize: 20,
@@ -88,26 +106,28 @@ class _HomeScreenState extends State<HomeScreen> {
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
-            FlatButton(
-              child: Text("關於"),
-              onPressed: () => widget.onAbout("about"),
-            ),
+            // FlatButton(
+            //   child: Text("關於"),
+            //   onPressed: () => widget.onAbout("about"),
+            // ),
             SizedBox(
               height: 700,
               width: screenSize.width,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Colors.orange,
-                  // image: DecorationImage(
-                  //     image: AssetImage("assets/images/1.jpg"),
-                  //     fit: BoxFit.cover),
+                  color: Color.fromRGBO(48, 48, 48, 1),
                 ),
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("全球工程師及採購的最佳幫手",
-                          style: TextStyle(color: Colors.white, fontSize: 64)),
+                      AutoSizeText(
+                        '我們是全球工程師及採購的最佳幫手',
+                        style: TextStyle(fontSize: _fonsize1),
+                        minFontSize: 10,
+                        stepGranularity: 10,
+                        maxLines: 1,
+                      ),
                       SizedBox(
                         height: 15,
                       ),
@@ -117,11 +137,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 50,
                       ),
                       FlatButton(
+                        color: Colors.orange,
                         minWidth: 240,
                         height: 64,
                         onPressed: () => print("button"),
                         child: Text(
-                          "聯絡我們",
+                          "立即購買",
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,
@@ -130,12 +151,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             letterSpacing: 3,
                           ),
                         ),
-                        color: Colors.blue,
                       ),
                     ],
                   ),
                 ),
               ),
+
               // Carousel(
               //   images: [
               //     // NetworkImage(
@@ -153,6 +174,85 @@ class _HomeScreenState extends State<HomeScreen> {
               //   dotBgColor: Colors.purple.withOpacity(0.9),
               //   borderRadius: true,
               // )
+            ),
+            Padding(
+              padding:
+                  EdgeInsets.only(left: 30, right: 30, top: 36, bottom: 36),
+              child: Row(
+                children: [
+                  Container(
+                    width: (screenSize.width - 60) * 0.5,
+                    height: 528,
+                    color: Colors.black54,
+                  ),
+                  SizedBox(width: 50),
+                  Container(
+                    width: (screenSize.width - 60) * 0.4,
+                    height: 528,
+                    child: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "關於品大",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 28,
+                          ),
+                          AutoSizeText(
+                            '我們是全球工程師及採購的最佳幫手',
+                            style: TextStyle(fontSize: 24),
+                            minFontSize: 10,
+                            stepGranularity: 10,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(
+                            height: 28,
+                          ),
+                          AutoSizeText(
+                            '品大科技專注於電子元件的現貨供應，免運費、短交期。提供主動IC及被動元件、電阻、電容、連接器、繼電器自動化及控制元件等等。',
+                            style: TextStyle(fontSize: 20),
+                            minFontSize: 10,
+                            stepGranularity: 10,
+                            maxLines: 6,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          InkWell(
+                            onTap: () => print("BUTTON"),
+                            child: Container(
+                              decoration: new BoxDecoration(
+                                border: new Border.all(
+                                    color: Colors.orange, width: 1.5), // 边色与边宽度
+                                // color: Color(0xFF9E9E9E), // 底色
+                                borderRadius:
+                                    new BorderRadius.circular((5.0)), // 圆角度
+                              ),
+                              height: 60,
+                              width: 200,
+                              child: Center(
+                                child: Text(
+                                  "聯絡我們",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                            ),
+                          ),
+                          // Text("提供主動IC及被動元件、電阻、電容、連接器、繼電器自動化及控制元件等等。"),
+                          // Text("廣泛用於車用、家電、醫療、航太、工業控制、消費性產品、IPC設備。"),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: screenSize.height / 30),
             // SizedBox(
@@ -213,6 +313,28 @@ class _HomeScreenState extends State<HomeScreen> {
           // SizedBox(height: screenSize.height / 8),
         ),
       ),
+      bottomNavigationBar: ResponsiveWidget.isSmallScreen(context)
+          ? NavigationBottomBar(
+              selectedIndex: 0,
+              onSelectTab: (index) {
+                switch (index) {
+                  case 1:
+                    widget.onAbout("contact");
+                    break;
+                  case 2:
+                    widget.onAbout("product");
+                    break;
+                  case 3:
+                    widget.onAbout("shopping");
+                    break;
+                  case 4:
+                    widget.onAbout("login");
+                    break;
+                  default:
+                }
+              },
+            )
+          : null,
       // body: Column(
       //   children: [
       //     FlatButton(

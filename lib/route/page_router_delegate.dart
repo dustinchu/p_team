@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:p_team/model/product.dart';
-import 'package:p_team/screens/about.dart';
+import 'package:p_team/screens/about_screen.dart';
+import 'package:p_team/screens/contact_screen.dart';
 import 'package:p_team/screens/home/home_screen.dart';
+import 'package:p_team/screens/login_screen.dart';
+import 'package:p_team/screens/product.dart';
+import 'package:p_team/screens/product_screen.dart';
+import 'package:p_team/screens/shopping_screen.dart';
 import 'package:p_team/screens/unknown_screen.dart';
 
 import 'details_page.dart';
@@ -56,6 +61,26 @@ class PageRouterDelegate extends RouterDelegate<RoutePath>
           MaterialPage(key: ValueKey('UnknownPage'), child: UnknownScreen())
         else if (pageID == "about")
           MaterialPage(key: ValueKey('about'), child: AboutScreen())
+        else if (pageID == "contact")
+          MaterialPage(
+              key: ValueKey('contact'),
+              child: ContactScreen(
+                onAbout: (String value) {
+                  _handlePageTapped(value);
+                },
+              ))
+        else if (pageID == "product")
+          MaterialPage(key: ValueKey('product'), child: ProductScreen( onAbout: (String value) {
+                  _handlePageTapped(value);
+                },))
+        else if (pageID == "login")
+          MaterialPage(key: ValueKey('login'), child: LoginScreen( onAbout: (String value) {
+                  _handlePageTapped(value);
+                },))
+        else if (pageID == "shopping")
+          MaterialPage(key: ValueKey('shopping'), child: ShoppingScreen( onAbout: (String value) {
+                  _handlePageTapped(value);
+                },))
         else if (_selectedBook != null)
           DetailsPage(product: _selectedBook)
       ],
@@ -77,13 +102,16 @@ class PageRouterDelegate extends RouterDelegate<RoutePath>
 
   @override
   Future<void> setNewRoutePath(RoutePath path) async {
-    print("5");
     if (path.isUnknown) {
       _selectedBook = null;
       show404 = true;
       return;
     }
-    if (path.pageID == "about") {
+    if (path.pageID == "about" ||
+        path.pageID == "contact" ||
+        path.pageID == "product" ||
+        path.pageID == "login" ||
+        path.pageID == "shopping") {
       _selectedBook = null;
       show404 = false;
       pageID = path.pageID;

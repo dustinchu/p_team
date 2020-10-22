@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:p_team/common/responsive_widget.dart';
 import 'package:p_team/common/widget/navigation_bottom_bar.dart';
 
-class ProductScreen extends StatefulWidget {
+class ShoppingScreen extends StatefulWidget {
   final ValueChanged<String> onAbout;
-  ProductScreen({
+  ShoppingScreen({
     @required this.onAbout,
   });
-
   @override
-  _ProductScreenState createState() => _ProductScreenState();
+  _ShoppingScreenState createState() => _ShoppingScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _ShoppingScreenState extends State<ShoppingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +20,7 @@ class _ProductScreenState extends State<ProductScreen> {
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
-            Text("Product"),
+            Text("Shpping"),
             Container(
               color: Colors.blue,
               height: 500,
@@ -39,7 +38,7 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
       bottomNavigationBar: ResponsiveWidget.isSmallScreen(context)
           ? NavigationBottomBar(
-              selectedIndex: 2,
+              selectedIndex: 3,
               onSelectTab: (index) {
                 switch (index) {
                   case 0:

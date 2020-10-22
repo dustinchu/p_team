@@ -13,7 +13,7 @@ class InfoText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        SelectableText(
           '$type: ',
           style: TextStyle(
             color: Colors.blueGrey[300],
@@ -21,7 +21,7 @@ class InfoText extends StatelessWidget {
           ),
         ),
         Flexible(
-          child: Text(
+          child: SelectableText(
             text,
             style: TextStyle(
               color: Colors.blueGrey[100],

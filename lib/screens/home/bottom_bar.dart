@@ -47,14 +47,24 @@ class BottomBar extends StatelessWidget {
                   height: 1,
                 ),
                 SizedBox(height: 20),
-                InfoText(
-                  type: 'Email',
-                  text: 'explore@gmail.com',
+                Text(
+                  "客戶服務部",
+                  style: TextStyle(fontSize: 15),
                 ),
-                SizedBox(height: 5),
+                SizedBox(height: 8),
                 InfoText(
-                  type: 'Address',
-                  text: '128, Trymore Road, Delft, MN - 56124',
+                  type: "電話",
+                  text: '+886-2-2697-5001',
+                ),
+                SizedBox(height: 8),
+                InfoText(
+                  type: '傳真',
+                  text: '+886-2-2697-3390',
+                ),
+                SizedBox(height: 8),
+                InfoText(
+                  type: '信箱',
+                  text: 'service@pteamtech.com',
                 ),
                 SizedBox(height: 20),
                 Container(
@@ -64,7 +74,7 @@ class BottomBar extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Copyright © 2020 | EXPLORE',
+                  '© 2020 品大科技 | P-Team Technology Inc.  Website design by TSG',
                   style: TextStyle(
                     color: Colors.blueGrey[300],
                     fontSize: 14,
@@ -104,14 +114,24 @@ class BottomBar extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        InfoText(
-                          type: 'Email',
-                          text: 'explore@gmail.com',
+                        Text(
+                          "客戶服務部",
+                          style: TextStyle(fontSize: 15),
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 8),
                         InfoText(
-                          type: 'Address',
-                          text: '128, Trymore Road, Delft, MN - 56124',
+                          type: "電話",
+                          text: '+886-2-2697-5001',
+                        ),
+                        SizedBox(height: 8),
+                        InfoText(
+                          type: '傳真',
+                          text: '+886-2-2697-3390',
+                        ),
+                        SizedBox(height: 8),
+                        InfoText(
+                          type: '信箱',
+                          text: 'service@pteamtech.com',
                         )
                       ],
                     ),
@@ -127,7 +147,7 @@ class BottomBar extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Copyright © 2020 | EXPLORE',
+                  '© 2020 品大科技 | P-Team Technology Inc.   Website design by TSG',
                   style: TextStyle(
                     color: Colors.blueGrey[300],
                     fontSize: 14,
